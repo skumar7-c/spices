@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice E-commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        .hero-banner-background {
+            /* The 'background-image' property is set up to repeat three 100vw images across the 300vw container.
+               We use two layers: a gradient for content readability, and the image itself.
+            */
+            background-image: 
+                /* Image 1 */
+                linear-gradient(rgba(250, 248, 248, 0.1), rgba(255, 255, 255, 0.5)), url('download.jpg'), 
+                /* Image 2 */
+                linear-gradient(rgba(243, 240, 240, 0.5), rgba(249, 249, 249, 0.5)), url('banner2.jpg'), 
+                /* Image 3 */
+                linear-gradient(rgba(246, 245, 245, 0.5), rgba(248, 245, 245, 0.5)), url('banner1.jpg'),
+                linear-gradient(rgba(250, 258, 250, 0.5), rgba(250, 250, 250, 0.5)), url('banner.jpg'); 
+
+            /* Position the three background sets horizontally across the 300vw element */
+            background-position: 0% 0%, 100vw 0%, 200vw 0%; 
+        }
+        
+        /* Temporary images for Product Page - Replace with your own images */
+        .product-gallery img {
+            background-color: #f0f0f0; /* Helps visualize missing images */
+        }
+    </style>
+    </head>
+<body>
+
+    <header class="homepage-header">
+        <nav>
+            <div class="logo">SKSpice</div>
+            <div class="search-bar">
+                <input type="text" id="product-search" placeholder="Search products...">
+                <ul id="suggestions" class="suggestions-list"></ul>
+            </div>
+            <div class="nav-links">
+                <a href="#categories"><i class="fas fa-th-large"></i> Categories</a>
+                <a href="#cart"><i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count">0</span>)</a>
+                <a href="#account" id="account-link"><i class="fas fa-user"></i> Account</a>
+            </div>
+        </nav>
+        <div class="hero-banner"> 
+            <div class="hero-banner-background"></div> 
+            <div class="hero-content">
+                <h1>Pure, Fresh, and Authentic Spices Delivered to You.</h1>
+                <p>Experience the true taste of nature with our hand-picked selections.</p>
+                <a href="#featured" class="cta-button primary-btn">Shop Now</a>
+            </div>
+        </div>
+        <div class="trust-badges">
+            <span><i class="fas fa-leaf"></i> 100% Natural</span>
+            <span><i class="fas fa-lock"></i> Secure Checkout</span>
+            <span><i class="fas fa-truck"></i> Fast Delivery</span>
+        </div>
+    </header>
+
+    <main>
+        <section id="offers" class="section-container animated-section slide-up">
+            <h2> Seasonal Deals & Combos</h2>
+            <div class="offer-cards">
+                <div class="card">Buy 2, Get 1 Free on all Staples!</div>
+                <div class="card">Weekend Combo Pack: 20% Off!</div>
+            </div>
+        </section>
+
+        <section id="categories" class="section-container animated-section slide-up">
+            <h2>Explore Our Categories</h2>
+            <div class="featured-categories">
+                <div class="category-item">Staples (Rice, Flour)</div>
+                <div class="category-item">Whole Spices (Cumin, Turmeric)</div>
+                <div class="category-item">Bestsellers</div>
+            </div>
+            <div class="category-content">
+                <h3>Whole Spices</h3>
+                <div class="sort-options">
+                    <span>Sort By:</span>
+                    <button class="sort-btn active" data-sort="popularity">Popularity</button>
+                    <button class="sort-btn" data-sort="newest">Newest</button>
+                    <button class="sort-btn" data-sort="price">Price</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="product-page" class="section-container animated-section slide-up">
+            <h2>Product Spotlight: Premium Cumin Seeds</h2>
+            <div class="product-details-grid">
+                <div class="product-gallery">
+                    <img src="cumin.jpg" alt="Cumin Seeds" class="main-image">
+                    <div class="thumbnail-row">
+                        <img src="images.jpg" alt="Angle 1" class="thumbnail active">
+                        <img src="cuminn.png" alt="Angle 2" class="thumbnail">
+                        <img src="cuminok.jpg" alt="Nutrition" class="thumbnail">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Whole Spices: Premium Cumin Seeds</h3>
+                    <p><strong>Description:</strong> Hand-picked, naturally dried, and highly aromatic whole cumin seeds. Perfect for tempering and grinding.</p>
+                    <p><strong>Nutritional Details:</strong> High in iron and fiber. Store in a cool, dry place.</p>
+
+                    <div class="price-options">
+                        <span class="price-display">₹199.00</span>
+                        <label for="quantity-option">Select Weight:</label>
+                        <select id="quantity-option">
+                            <option value="100g">100g - ₹199.00</option>
+                            <option value="250g">250g - ₹450.00</option>
+                            <option value="500g">500g - ₹800.00</option>
+                        </select>
+                    </div>
+
+                    <button id="add-to-cart-btn" class="cta-button add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+
+                    <div class="reviews-section">
+                        <h4>Customer Reviews (4.5/5 ⭐)</h4>
+                        <p>Great quality and aroma! - **Ramesh K.**</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Related Products</h3>
+            <div class="related-products">
+                <div class="product-card">Turmeric Powder</div>
+                <div class="product-card">Whole Cinnamon Sticks</div>
+            </div>
+        </section>
+
+        <section id="cart" class="section-container animated-section slide-up">
+            <h2>🛒 Your Cart & Checkout</h2>
+            <div id="cart-items-list" class="cart-items-list">
+                <p>Your cart is empty. Try adding the Premium Cumin Seeds!</p>
+            </div>
+
+            <div class="promo-code-section">
+                <input type="text" id="promo-code-input" placeholder="Enter Discount/Promo Code">
+                <button id="apply-promo-btn" class="cta-button">Apply</button>
+                <p id="promo-status" class="promo-message"></p>
+            </div>
+
+            <div id="order-summary" class="order-summary">
+                <h3>Order Summary</h3>
+                <p>Subtotal: <span id="subtotal">₹0.00</span></p>
+                <p>Discount: <span id="discount">₹0.00</span></p>
+                <p class="total-price">Total: <span id="total-price">₹0.00</span></p>
+            </div>
+
+            <button id="proceed-to-checkout-btn" class="cta-button primary-btn">Proceed to Checkout</button>
+        </section>
+
+        <section id="account" class="section-container animated-section slide-up">
+            <h2>👤 My Account</h2>
+            <div id="auth-section" class="auth-section">
+                <input type="email" placeholder="Email/Phone for Sign-Up/Login">
+                <button id="login-signup-btn" class="cta-button">Login / Sign Up</button>
+            </div>
+
+            <div id="profile-section" class="profile-section hidden">
+                <h3>Welcome Back, User!</h3>
+                <div class="account-options">
+                    <div class="option-card"><i class="fas fa-address-book"></i> Saved Addresses</div>
+                    <div class="option-card"><i class="fas fa-history"></i> Order History</div>
+                    <div class="option-card"><i class="fas fa-heart"></i> Wish List</div>
+                    <div class="option-card reorder-option"><i class="fas fa-redo-alt"></i> Reorder Past Purchases</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-content">
+            <h3>Checkout</h3>
+            <span class="close-btn">&times;</span>
+
+            <div class="checkout-toggle">
+                <button id="guest-checkout-btn" class="active">Guest Checkout</button>
+                <button id="registered-checkout-btn">Registered User</button>
+            </div>
+
+            <div id="login-form" class="hidden form-group">
+                <h4>Login</h4>
+                <input type="email" placeholder="Email/Phone">
+                <input type="password" placeholder="Password">
+                <button class="cta-button primary-btn">Login</button>
+            </div>
+
+            <h4>Delivery Address</h4>
+            <form id="delivery-address-form">
+                <div class="form-group"><input type="text" placeholder="Full Name" required></div>
+                <div class="form-group"><input type="tel" placeholder="Phone Number" required></div>
+                <div class="form-group"><textarea placeholder="Full Address" required></textarea></div>
+            </form>
+
+            <h4>Multiple Payment Options</h4>
+            <div class="payment-options">
+                <label><input type="radio" name="payment" value="upi" checked> UPI</label>
+                <label><input type="radio" name="payment" value="card"> Credit/Debit Card</label>
+                <label><input type="radio" name="payment" value="netbanking"> Net Banking</label>
+                <label><input type="radio" name="payment" value="cod"> COD (Cash on Delivery)</label>
+            </div>
+
+            <button id="place-order-btn" class="cta-button primary-btn">Place Order (₹<span id="final-total">0.00</span>)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

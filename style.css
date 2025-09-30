@@ -1,0 +1,670 @@
+/* --- Global Styles & Reset --- */
+:root {
+    --primary-color: #4CAF50; /* A fresh green for spices/natural theme */
+    --secondary-color: #FF9800; /* Amber for highlights/buttons */
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --card-bg: #fff;
+    --price-color: #d32f2f; /* Red for price */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+a:hover {
+    color: var(--secondary-color);
+}
+
+.cta-button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.cta-button:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+}
+.primary-btn {
+    background-color: var(--primary-color);
+}
+.primary-btn:hover {
+    background-color: #45a049;
+}
+
+/* --- Base Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-section {
+    opacity: 0; 
+    animation: fadeIn 0.8s ease-out forwards;
+}
+.slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+/* --- 1. Homepage Header & Navigation --- */
+.homepage-header {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.search-bar {
+    position: relative;
+    flex-grow: 0.5;
+    margin: 0 20px;
+}
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+}
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    border: 1px solid #eee;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.nav-links a {
+    margin-left: 20px;
+    font-weight: 500;
+}
+.nav-links i {
+    margin-right: 5px;
+}
+#cart-count {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------- */
+/* --- HERO BANNER SLIDER (3 IMAGES) --- */
+/* ---------------------------------------------------- */
+
+/* Container for the slider */
+.hero-banner {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative; 
+    overflow: hidden; 
+}
+
+/* Keyframes for the Right-to-Left Slide (3 images) */
+@keyframes slideShow {
+    0% { transform: translateX(0); } 
+    30% { transform: translateX(0); }
+    33.33% { transform: translateX(-100vw); } /* Slide left to Image 2 */
+    63.33% { transform: translateX(-100vw); } 
+    66.66% { transform: translateX(-200vw); } /* Slide left to Image 3 */
+    96.66% { transform: translateX(-200vw); }
+    100% { transform: translateX(0); } /* Snap back to Image 1 for continuous loop */
+}
+
+
+/* Inner element that holds ALL background images */
+.hero-banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300vw; /* 3 images x 100vw */
+    height: 100%;
+    
+    /* Set the size for each individual background layer */
+    background-size: 100vw 100%; 
+    /* IMPORTANT: Use 'no-repeat' here to ensure multiple backgrounds are individually positioned and not tiled within the 300vw space */
+    background-repeat: no-repeat; 
+    
+    /* This positioning is handled by the inline <style> block in the HTML */
+    /* background-position: 0% 0%, 100vw 0%, 200vw 0%; */
+    
+    z-index: 0; 
+    animation: slideShow 9s infinite linear; /* 3 seconds per image = 9s total */
+}
+
+/* Gradient Overlay - Used to ensure content is readable */
+.hero-banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Remove this gradient overlay if your images already have a dark filter */
+    background: rgba(0,0,0,0.5); 
+    z-index: 1; 
+}
+
+/* Ensure content is above the background and overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 80%;
+    animation: fadeIn 1s ease-out; 
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: #e8f5e9; /* Light green */
+    color: var(--primary-color);
+    font-weight: bold;
+}
+.trust-badges span {
+    margin: 0 15px;
+    animation: slideUp 0.6s ease-out backwards 0.2s;
+}
+.trust-badges i {
+    margin-right: 5px;
+}
+
+/* Offers Section */
+.offer-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.offer-cards .card {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    flex-basis: 40%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+/* --- 3. Categories & Sections Styles --- */
+.section-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--price-color);
+    padding-bottom: 10px;
+}
+
+.featured-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.category-item {
+    background-color: #f1f8e9;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.category-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sort-options {
+    margin-bottom: 20px;
+}
+.sort-options span {
+    font-weight: 500;
+}
+.sort-btn {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.sort-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* --- 2. Product Page Styles --- */
+.product-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+}
+.product-gallery .main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+    animation: fadeIn 0.5s;
+}
+.thumbnail-row {
+    display: flex;
+    gap: 10px;
+}
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    border: 2px solid transparent;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s, border-color 0.3s;
+}
+.thumbnail:hover, .thumbnail.active {
+    opacity: 1;
+    border-color: var(--secondary-color);
+}
+
+.product-info h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+.price-options {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.price-display {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--price-color); 
+}
+#quantity-option {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.add-to-cart-btn {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.reviews-section {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+.reviews-section h4 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.related-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+.product-card {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    text-align: center;
+    flex-basis: calc(50% - 7.5px); /* Adjusted for responsiveness */
+    transition: box-shadow 0.3s;
+}
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+/* --- 4. Cart & Checkout Styles --- */
+.cart-items-list {
+    min-height: 50px;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+/* NOTE: Cart item structure is not in the provided HTML, but CSS is good */
+
+.promo-code-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.promo-code-section input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#apply-promo-btn {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#promo-status {
+    margin-top: 5px;
+    flex-basis: 100%;
+}
+.promo-message {
+    color: var(--price-color);
+    font-style: italic;
+}
+.promo-message.success {
+    color: var(--primary-color);
+}
+
+.order-summary {
+    border-top: 2px solid var(--primary-color);
+    padding-top: 15px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+.order-summary p {
+    margin-bottom: 5px;
+}
+.total-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--price-color);
+}
+#proceed-to-checkout-btn {
+    width: 100%;
+}
+
+/* Checkout Modal */
+.checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by JS by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.checkout-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.checkout-content {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    transform: scale(0.9);
+    animation: slideUp 0.5s forwards;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--text-color);
+}
+.checkout-content h3, .checkout-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.checkout-toggle {
+    margin-bottom: 20px;
+}
+.checkout-toggle button {
+    padding: 10px 15px;
+    border: 1px solid var(--primary-color);
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.checkout-toggle button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 0 0; /* Adjusted margin */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.payment-options label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+#place-order-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* --- 5. User Account Styles --- */
+.auth-section, .profile-section {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.auth-section input {
+    padding: 10px;
+    width: 250px; /* Adjusted for better spacing */
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-section h3 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.account-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+.option-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+.option-card i {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: block;
+}
+.option-card:hover {
+    transform: translateY(-5px);
+    background-color: #e8f5e9;
+}
+.reorder-option {
+    background-color: #fff3e0; /* Light orange for reorder */
+}
+
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .nav-links {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+    .nav-links a {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .product-details-grid {
+        grid-template-columns: 1fr;
+    }
+    .thumbnail-row {
+        justify-content: center;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-banner {
+        height: 300px; /* shorter hero on mobile */
+    }
+    .offer-cards {
+        flex-direction: column;
+    }
+    .offer-cards .card {
+        flex-basis: auto;
+    }
+    .trust-badges {
+        flex-direction: column;
+    }
+    .trust-badges span {
+        margin: 5px 0;
+    }
+    .related-products {
+        justify-content: space-between;
+    }
+    .product-card {
+        flex-basis: 100%;
+    }
+    .auth-section input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .promo-code-section {
+        flex-wrap: wrap;
+    }
+    #apply-promo-btn {
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.5em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .price-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .price-options label, .price-options select {
+        width: 100%;
+    }
+}
